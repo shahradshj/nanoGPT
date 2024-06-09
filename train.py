@@ -250,6 +250,11 @@ if wandb_log and master_process:
 print(f"model config {model.config}")
 
 
+global_vars = {k: v for k,v in globals().items() if not k.startswith('_') and isinstance(v, (int, float, bool, str))}
+for k, v in global_vars.items():
+    print(f"{k}: {v}")
+
+
 # training loop
 X, Y = get_batch('train') # fetch the very first batch
 t0 = time.time()
